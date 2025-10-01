@@ -10,11 +10,13 @@
   - [Outline](#outline)
   - [Motivation \& Theory](#motivation--theory)
     - [The Optimization](#the-optimization)
-      - [Setup (Single Feature)](#setup-single-feature)
       - [Remarks](#remarks)
       - [Worked numeric sketch (degree 2)](#worked-numeric-sketch-degree-2)
   - [Multivariate polynomial regression (generalization)](#multivariate-polynomial-regression-generalization)
   - [When to use polynomial regression](#when-to-use-polynomial-regression)
+  - [Setup](#setup)
+    - [Prerequisites](#prerequisites)
+    - [Installation](#installation)
   - [License](#license)
 
 ---
@@ -23,11 +25,11 @@
 
 *Note: for context, you might want to read up on [Linear Regression](https://github.com/intelligent-username/Linear-Regression) first. There's a lot of overlap/repetition in the concepts
 
-Often times, we have a set of data points and want to generalize them to make useful predictions. This is largely what machine learning is about. Now, after engineering, cleaning, and transforming the data, you want to use it to train a model. However, the relationship between the features and the target variable may not always be linear.
+Say we want to deterministically create a predictive model with nice, clean data. However, this data is not always mappable through a linear function. That's where polynomial regression comes in.
 
 Polynomial regression extends linear regression by adding extra predictors, obtained by raising each of the original predictors to a power. This allows the model to fit a wider range of curves and capture more complex relationships in the data.
 
-Firstly, we have to define how we measure accuracy. The function that tells us how well our model is doing is called the **Loss Function**. Since this is our measure of accuracy, this is the metric we have to optimize for in order to create the ideal model.
+Firstly, we have to define how we measure accuracy. The function that tells us how well our model is doing is called the [Loss Function](github.com/intelligent-username/Loss-Functions). Since this is our measure of accuracy, this is the metric we have to optimize for in order to create the ideal model.
 
 In this writeup, we will be using the Mean Squared Error (MSE) as our loss function, which is defined as:
 
@@ -51,13 +53,9 @@ $$\beta_0, \beta_1, \ldots, \beta_d$$
 - $x$ is the input feature.
 - $h(x)$ is the predicted output.
 
-Now, notice that this $d$-degree graph is only working in two dimensions (i.e. mapping one feature and one target variable). Expanding the scope to multiple features is straightforward, so I'll work with the single feature case for building the intuition and then proceed to generalize.
+Now, notice that this $d$-degree graph is only working in two dimensions (i.e. mapping one feature to a target). Expanding the scope to multiple features is straightforward, so I'll work with the single feature case for  building the intuition and then proceed to generalize.
 
 ### The Optimization
-
-This section derives the normal equations for polynomial regression from first principles for the single-feature (2‑D point) case, then generalizes to multiple features.
-
-#### Setup (Single Feature)
 
 Given data points $x_i, y_i$ for $i=1,\dots,n$ and a polynomial degree $d$, define the prediction, $\hat{y}_i$:
 
@@ -83,11 +81,11 @@ $$
 \frac{\partial L}{\partial \beta_1} \\
 \vdots \\
 \frac{\partial L}{\partial \beta_d}
-\end{pmatrix} = \begin{pmatrix}
--\frac{2}{n} \sum_{i=1}^n \big(y_i - \sum_{k=0}^d \beta_k x_i^k\big) \\
--\frac{2}{n} \sum_{i=1}^n \big(y_i - \sum_{k=0}^d \beta_k x_i^k\big) x_i \\
+\end{pmatrix} = -\frac{2}{n}\begin{pmatrix}
+\sum_{i=1}^n \big(y_i - \sum_{k=0}^d \beta_k x_i^k\big) \\
+\sum_{i=1}^n \big(y_i - \sum_{k=0}^d \beta_k x_i^k\big) x_i \\
 \vdots \\
--\frac{2}{n} \sum_{i=1}^n \big(y_i - \sum_{k=0}^d \beta_k x_i^k\big) x_i^d
+\sum_{i=1}^n \big(y_i - \sum_{k=0}^d \beta_k x_i^k\big) x_i^d
 \end{pmatrix}
 $$
 
@@ -99,7 +97,7 @@ $$
 
 \*Note:
 $$
-j \in \{0,\dots,d\}, j \in \mathbb{N}
+j \in \{0,\dots,d\} \land j \in \mathbb{N}
 $$
 
 Rearrange the sums to isolate $\beta$:
@@ -125,7 +123,7 @@ $$
 X = \begin{bmatrix}
 1 & x_1 & x_1^2 & \cdots & x_1^d \\
 1 & x_2 & x_2^2 & \cdots & x_2^d \\
-\vdots & \vdots & \vdots & & \vdots \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
 1 & x_n & x_n^2 & \cdots & x_n^d
 \end{bmatrix}_{n\times(d+1)}.
 $$
@@ -236,9 +234,10 @@ The number of such terms (including the constant) is
 $$
 N(p,d) = {p + d \choose d},
 $$
-which grows combinatorially and explains the rapid blow‑up in model complexity.
 
-Construct the design matrix with columns $\phi_0(\mathbf{x}),\phi_1(\mathbf{x}),\dots,\phi_{N-1}(\mathbf{x})$ evaluated at each data point. The normal equations and solution are identical:
+This rapidly blows up the model's complexity.
+
+The constructed matrix still has the form:
 
 $$
 \beta = (X^\top X)^{-1} X^\top y.
@@ -261,6 +260,32 @@ Avoid when:
 
 - The relationship is locally complex (use splines or kernel methods).
 - Dimensionality is high and interactions are many (use parsimonious models or regularized learners).
+
+---
+
+## Setup
+
+### Prerequisites
+
+- A C++ compiler (g++ for Windows, clang for MacOS, gcc for Linux)
+- A terminal/command line interface
+- Eigen library (for matrix operations). Download from [Eigen's GitLab](https://gitlab.com/libeigen/eigen/-/releases), unzip, and include it in this project or elsewhere that it can be accessed from (for example, the /include folder on Linux machines.).
+
+### Installation
+
+Clone this repo
+
+```bash
+git clone https://github.com/intelligent-username/Polynomial-Regression.git
+```
+
+Run the `.exe` file in the main directory.
+
+```bash
+./PR.exe
+```
+
+or import the `PolynomialRegression.h` file into your C++ project as a module.
 
 ---
 
