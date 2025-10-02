@@ -1,7 +1,4 @@
-/**
- * Small demonstration of polynomial regression.
- */
-
+// src/PR.cpp (demo entry point – name preserved)
 #include "PolynomialRegression.h"
 #include <iostream>
 #include <vector>
@@ -17,7 +14,7 @@ static void printCoeffs(const std::vector<double>& coeffs) {
 int main() {
     std::printf("Polynomial Regression from Scratch\n");
 
-    PolynomialRegression model; // using the header's class now
+    PolynomialRegression model;
 
     {
         std::vector<double> flatPoints = {1,1, 2,4, 3,9};
@@ -37,4 +34,3 @@ int main() {
 
     return 0;
 }
-
