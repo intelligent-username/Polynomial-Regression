@@ -1,5 +1,5 @@
-// include/PolynomialRegression.h
-// Public interface for polynomial regression (educational, minimal)
+// include/polynomial/PolynomialRegression.h
+// Public interface for polynomial regression (supports 1D & multi-feature)
 
 #ifndef POLYNOMIALREGRESSION_H
 #define POLYNOMIALREGRESSION_H
@@ -14,11 +14,9 @@ public:
     std::vector<double> fit(const std::vector<double>& points, int desiredDegree);
 
     // Multidimensional polynomial regression.
-    // samples: each inner vector has size = num_features + 1 (last element = target y)
-    // degree: maximum total degree of polynomial terms.
-    // Generates all monomials with sum(exponents) <= degree.
-    // Coefficient ordering: lexicographic over exponent tuples (e0,e1,...,ef-1)
-    // starting from (0,0,...,0), then single-feature powers, then interactions, etc.
+    // samples: each inner vector size = num_features + 1 (last element is y)
+    // degree: maximum total degree of monomials included.
+    // Monomials: all exponent tuples (e0..eF-1) with sum <= degree, lexicographic per increasing total and recursion order.
     std::vector<double> fitMulti(const std::vector<std::vector<double>>& samples, int degree);
 };
 

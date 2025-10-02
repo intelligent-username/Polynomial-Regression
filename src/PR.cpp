@@ -1,5 +1,5 @@
-// src/PR.cpp (demo entry point – name preserved)
-#include "PolynomialRegression.h"
+// src/PR.cpp (demo entry point – name preserved; will be main.cpp later if desired)
+#include "polynomial/PolynomialRegression.h"
 #include <iostream>
 #include <vector>
 #include <cstdio>

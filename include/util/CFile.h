@@ -1,22 +1,10 @@
-/**
- * CFile.h
- * ------------------------------------------------------------
- * A tiny RAII convenience wrapper around FILE* for future test &
- * utility code. This is intentionally *minimal* so you can expand it
- * later (e.g. add append, binary mode, etc.).
- *
- * WHAT is a "CFile"?
- *  In many codebases a lightweight wrapper is created around raw C
- *  file handles (FILE*) to ensure deterministic closing (RAII) and to
- *  provide a small, consistent interface. Here we implement only what
- *  we need as a scaffold for later logging / fixtures.
- */
+// include/util/CFile.h
+// Tiny RAII FILE* wrapper (header-only for now)
 
 #ifndef CFILE_H
 #define CFILE_H
 
 #include <string>
-#include <vector>
 #include <cstdio>
 #include <stdexcept>
 
