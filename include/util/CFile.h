@@ -7,6 +7,8 @@
 #include <string>
 #include <cstdio>
 #include <stdexcept>
+#include <cerrno>
+#include <cstring>
 
 class CFile {
 public:
@@ -31,13 +33,13 @@ public:
         close();
         handle_ = std::fopen(path.c_str(), mode);
         if (!handle_) {
-            throw std::runtime_error("Failed to open file: " + path);
+            throw std::runtime_error("Failed to open file '" + path + "': " + std::strerror(errno));
         }
         path_ = path;
     }
 
     bool isOpen() const { return handle_ != nullptr; }
-    const std::string& path() const { return path_; }
+    const std::string& path() const noexcept { return path_; }
 
     std::string readAll() {
         if (!handle_) throw std::runtime_error("File not open");
@@ -59,7 +61,7 @@ public:
         }
     }
 
-    void flush() {
+    void flush() noexcept {
         if (handle_) std::fflush(handle_);
     }
 

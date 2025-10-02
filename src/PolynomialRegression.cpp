@@ -7,6 +7,7 @@
 using Eigen::MatrixXd;
 using Eigen::VectorXd;
 
+// Forward declaration for recursive exponent enumeration
 std::vector<double> PolynomialRegression::fit(const std::vector<double>& points, int desiredDegree) {
     if (desiredDegree < 0) {
         throw std::invalid_argument("Degree must be non‑negative");
@@ -55,23 +56,7 @@ std::vector<double> PolynomialRegression::fit(const std::vector<double>& points,
     return std::vector<double>(coeffs.data(), coeffs.data() + coeffs.size());
 }
 
-// Helper: recursively enumerate exponent tuples with total degree <= maxDegree.
-static void enumerateExponents(int featureCount,
-                               int maxDegree,
-                               int pos,
-                               int remaining,
-                               std::vector<int>& current,
-                               std::vector<std::vector<int>>& out) {
-    if (pos == featureCount) {
-        out.push_back(current);
-        return;
-    }
-    for (int k = 0; k <= remaining; ++k) {
-        current[pos] = k;
-        enumerateExponents(featureCount, maxDegree, pos + 1, remaining - k, current, out);
-    }
-}
-
+// Actual Polynomial Regression
 std::vector<double> PolynomialRegression::fitMulti(const std::vector<std::vector<double>>& samples, int degree) {
     if (degree < 0) throw std::invalid_argument("Degree must be non-negative");
     if (samples.empty()) throw std::invalid_argument("At least one sample required");
@@ -124,3 +109,21 @@ std::vector<double> PolynomialRegression::fitMulti(const std::vector<std::vector
     }
     return std::vector<double>(coeffs.data(), coeffs.data() + coeffs.size());
 }
+
+// Recursively enumerate exponent tuples with total degree <= maxDegree.
+static void enumerateExponents(int featureCount,
+                               int maxDegree,
+                               int pos,
+                               int remaining,
+                               std::vector<int>& current,
+                               std::vector<std::vector<int>>& out) {
+    if (pos == featureCount) {
+        out.push_back(current);
+        return;
+    }
+    for (int k = 0; k <= remaining; ++k) {
+        current[pos] = k;
+        enumerateExponents(featureCount, maxDegree, pos + 1, remaining - k, current, out);
+    }
+}
+
