@@ -1,4 +1,4 @@
-// tests/test_polynomial_basic.cpp
+// Basic 1D correctness checks (constant, linear, quadratic)
 #include <iostream>
 #include <vector>
 #include <cmath>
@@ -13,7 +13,7 @@ static void printVec(const std::vector<double>& v) {
 
 int main() {
     std::cout << "[BASIC] PolynomialRegression tests" << std::endl;
-    PolynomialRegression pr;
+    poly::PolynomialRegression pr;
 
     // Constant
     {
