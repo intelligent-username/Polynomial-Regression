@@ -1,5 +1,0 @@
-name: polynomial-regression
-dependencies:
-  - python=3.8
-  - numpy
-  - matplotlib

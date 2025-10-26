@@ -12,8 +12,8 @@
     - [The Optimization](#the-optimization)
       - [Remarks](#remarks)
       - [Example (degree 2)](#example-degree-2)
-  - [Multivariate polynomial regression (generalization)](#multivariate-polynomial-regression-generalization)
-  - [When to use Polynomial Regression](#when-to-use-polynomial-regression)
+  - [Multivariate Polynomial Regression](#multivariate-polynomial-regression)
+  - [When to Use](#when-to-use)
   - [Setup](#setup)
     - [Prerequisites](#prerequisites)
     - [Installation](#installation)
@@ -215,7 +215,7 @@ The solution here is unique since $X^\top X$ is invertible (its determinant exis
 
 ---
 
-## Multivariate polynomial regression (generalization)
+## Multivariate Polynomial Regression
 
 Single‑feature polynomial regression generalizes by replacing the scalar power basis with a chosen set of multivariate basis functions (monomials or other basis) $\phi_j(\mathbf{x})$. For $p$ input features and maximum total degree $d$, the monomial basis contains all terms of the form
 
@@ -245,7 +245,7 @@ Practical notes:
 
 ---
 
-## When to use Polynomial Regression
+## When to Use
 
 - When the relationship is smooth and globally well approximated by a low‑degree polynomial.
 - When interpretability of polynomial coefficients is useful.

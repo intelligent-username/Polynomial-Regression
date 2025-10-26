@@ -5,32 +5,34 @@
 #include <vector>
 #include <cstdio>
 
-static void printCoeffs(const std::vector<double>& coeffs) {
-    for (std::size_t i = 0; i < coeffs.size(); ++i) {
-        std::cout << coeffs[i];
-        if (i + 1 < coeffs.size()) std::cout << ' ';
+using namespace std;
+
+static void printCoeffs(const vector<double>& coeffs) {
+    for (size_t i = 0; i < coeffs.size(); ++i) {
+        cout << coeffs[i];
+        if (i + 1 < coeffs.size()) cout << ' ';
     }
 }
 
 int main() {
-    std::printf("Polynomial Regression from Scratch\n");
+    printf("Polynomial Regression from Scratch\n");
 
     PolynomialRegression model;
 
     {
-        std::vector<double> flatPoints = {1,1, 2,4, 3,9};
+        vector<double> flatPoints = {1,1, 2,4, 3,9};
         auto coeffs = model.fit(flatPoints, 2);
-        std::cout << "Example 1 (y=x^2) coefficients: ";
+        cout << "Example 1 (y=x^2) coefficients: ";
         printCoeffs(coeffs);
-        std::cout << "\n";
+        cout << "\n";
     }
 
     {
-        std::vector<double> flatPoints = {0,1, 1,3, 2,5};
+        vector<double> flatPoints = {0,1, 1,3, 2,5};
         auto coeffs = model.fit(flatPoints, 1);
-        std::cout << "Example 2 (y=2x+1) coefficients: ";
+        cout << "Example 2 (y=2x+1) coefficients: ";
         printCoeffs(coeffs);
-        std::cout << "\n";
+        cout << "\n";
     }
 
     return 0;
