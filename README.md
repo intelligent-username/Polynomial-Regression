@@ -81,7 +81,12 @@ With:
 
 This is a quadratic function in $\beta$.
 
-$$\beta=\begin{pmatrix}\beta_0\\\beta_1\\\vdots\\\beta_d\end{pmatrix}.$$
+$$\beta=\begin{pmatrix}
+\beta_0 \\
+\beta_1 \\
+\vdots \\
+\beta_d \\
+\end{pmatrix}.$$
 
 Now, in order to maximize accuracy, we want to minimize the loss. Since **MSE** is convex, it's guaranteed to have a global minimum. To find it, compute the gradient:
 
@@ -169,7 +174,22 @@ $$x_1=1, x_2=2, x_3=3. $$
 Design matrix
 
 $$
-X= \begin{bmatrix}1^0&1^1&1^2\\2^0&2^1&2^2\\3^0&3^1&3^2\end{bmatrix} = \begin{bmatrix}1&1&1\\1&2&4\\1&3&9\end{bmatrix},\quad y=\begin{bmatrix}1\\4\\9\end{bmatrix}.
+X= \begin{bmatrix}
+1^0&1^1&1^2 \\
+2^0&2^1&2^2 \\
+3^0&3^1&3^2
+\end{bmatrix}
+= \begin{bmatrix}
+1&1&1 \\
+1&2&4 \\
+1&3&9
+\end{bmatrix},
+\quad
+y=\begin{bmatrix}
+1 \\
+4 \\
+9
+\end{bmatrix}.
 $$
 
 Compute $X^\top X$ and $X^\top y$:
@@ -189,9 +209,22 @@ $$
 Explicitly:
 
 $$
-\begin{bmatrix} 3 & 6 & 14 \\ 6 & 14 & 36 \\ 14 & 36 & 98 \end{bmatrix}
-\begin{bmatrix} \beta_0 \\ \beta_1 \\ \beta_2 \end{bmatrix} \,=
-\begin{bmatrix} 14 \\ 36 \\ 98 \end{bmatrix}
+\begin{bmatrix}
+3 & 6 & 14 \\
+6 & 14 & 36 \\
+14 & 36 & 98 \\
+\end{bmatrix}
+\begin{bmatrix}
+\beta_0 \\
+\beta_1 \\
+\beta_2 \\
+\end{bmatrix}
+\,=
+\begin{bmatrix}
+14 \\
+36 \\
+98 \\
+\end{bmatrix}
 $$
 
 By row reduction, we find:
@@ -205,7 +238,9 @@ Thus:
 $$
 \beta =
 \begin{bmatrix}
-0 \\ 0 \\ 1
+0 \\
+0 \\
+1 \\
 \end{bmatrix}.
 $$
 
