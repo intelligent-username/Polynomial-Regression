@@ -197,7 +197,12 @@ Compute $X^\top X$ and $X^\top y$:
 $$
 X^\top X=\begin{pmatrix}3 & 6 & 14 \\
 6 & 14 & 36 \\
-14 & 36 & 98\end{pmatrix},\qquad X^\top y=\begin{pmatrix}14\\36\\98\end{pmatrix}.
+14 & 36 & 98\end{pmatrix},\qquad X^\top
+y=\begin{pmatrix}
+14 \\
+36 \\
+98 \\
+\end{pmatrix}.
 $$
 
 We have:
